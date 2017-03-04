@@ -5,22 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cipher app</title>
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="app.js"></script>
 </head>
 <body>
-    <h1>Velkommen til krypteringssiden</h1>
-    <form>Vælg nøgle (Cæsars Cipher):
-         <input type="text" id="inputKey" name="plaintext" value="Tal">
+    <div class="container">
+        <div class="header clearfix">
+        <nav>
+          
+        </nav>
+        <h3 class="text-muted">Rikkes krypteringsside</h3>
+      </div>
+      <div class="jumbotron">
+        <h1>Velkommen</h1>
+        <p class="lead">Denne side krypterer dine tekster ved brug af "Ceasars Sipher". Indtast din nøgle (et heltal), og den tekst krypteres.</p>
+       
+      </div>
+  <div class="row marketing">
+      <div class="col-lg-6"> 
+    <form>Vælg nøgle (heltal):
+         <input type="text" id="inputKey" name="plaintext" value="">
         <br><br>
         Tekst til kryptering:<br>
-        <input type="text" id="plaintext" name="plaintext" value="Skriv din tekst her">
+        <!--<input type="text" id="plaintext" name="plaintext" value="Skriv din tekst her">-->
+        <textarea class="input" id="plaintext" rows="5" cols="20">Some text here</textarea>
         <br><br>            
         <input type="button" onclick="cipher()" value="Vis krypteret tekst">
     </form>
+      </div>
+</div>
+
 
 <p id="demo"></p>
 <p id="cipherText"></p>
     
-    
+    </div>
 </body>
 </html>

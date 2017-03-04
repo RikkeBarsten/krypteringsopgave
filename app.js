@@ -5,6 +5,8 @@ function cipher() {
     else 
     {
         console.log(key);
+
+        
     
         document.getElementById("demo").innerHTML =
         "Du har valgt nøglen: " + key.toString();
@@ -19,12 +21,15 @@ function cipher() {
         {
             
             var index = plaintext.charCodeAt(i);
-            ciphertext += String.fromCharCode(index + key);
+
+            //There are only 65.536 values in utf-8, so making sure the 
+            //cipher is wrapped if charCode + key exceeds this number:
+            ciphertext += String.fromCharCode((index + key) % 65536);
             
         }
 
         document.getElementById("cipherText").innerHTML =
-        "Din krypterede tekst er: " + "<br>" + ciphertext;
+        "Din krypterede tekst er: " + "<br><br>" + ciphertext + "<br><br>" + "Tip: Kopier den krypterede tekst ind, og brug den samme nøgle med modsat fortegn for at dekryptere.";
     }
 }
 
