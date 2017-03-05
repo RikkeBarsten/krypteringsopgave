@@ -2,4 +2,9 @@
     word-break: break-word;
 }
 
-.bar { fill: indianred; }
+.bar1 { fill: indianred; }
+
+.bar2 { 
+    fill: cadetblue;
+    opacity: 0.5; 
+}

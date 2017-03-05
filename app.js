@@ -34,43 +34,34 @@ function cipher() {
 }
 
 function frekvens(){
-    var text = document.getElementById("frekvenstekst").value;
-    var letterCountArray = [];
-    var currentLetter = "";
-    var letterExists;
+    var referenceText = document.getElementById("frekvenstekst").value;
+    var cipherText = document.getElementById("krypteret").value;
+    
+    var letterCountArray_ref = getFrequencyArray(referenceText);
+    var letterCountArray_ciph = getFrequencyArray(cipherText);
 
-    for (i = 0; i < text.length; i++){
-        letterExists = false;
-        currentLetter = text.charAt(i);
-        letterCountArray.forEach( function (letterCount){
-                if (letterCount.letter == currentLetter)
-                {
-                    letterCount.count ++;
-                    letterExists = true;
-                }
-                
-                    
-         })
-         if (!letterExists)
-            letterCountArray.push( {"letter": currentLetter, "count": 1});
-        }
-        console.log(JSON.stringify(letterCountArray));
-
-        (function (data)
+        (function (data1, data2)
         {
            var margin = {top: 20, right: 20, bottom: 30, left: 40},
                         width = 960 - margin.left - margin.right,
                         height = 500 - margin.top - margin.bottom;
 
-            data.sort(function(a, b) { return b.count - a.count; });
+            data1.sort(function(a, b) { return b.count - a.count; });
+            data2.sort(function(a, b) { return b.count - a.count; });
             
             var x = d3.scaleBand()
                     .range([0, width])
                     .padding(0.1)
-                    .domain(data.map( function (d) {return d.letter;}))
+                    .domain(data1.map( function (d) {return d.letter;}));
+
+            var x2 = d3.scaleBand()
+                    .range([0, width])
+                    .padding(0.1)
+                    .domain(data2.map(function (d) { return d.letter;}));
+
             var y = d3.scaleLinear()
                     .range([height, 0])
-                    .domain([0, d3.max(data, function (d){return +d.count;})]);
+                    .domain([0, d3.max(data1, function (d){return +d.count;})]);
             
             // append the svg object to the body of the page
             // append a 'group' element to 'svg'
@@ -84,10 +75,22 @@ function frekvens(){
 
             // Append bars
             svg.selectAll(".bar")
-                .data(data)
+                .data(data1)
                 .enter().append("rect")
-                .attr("class", "bar")
+                .attr("class", "bar1")
                 .attr("x", function (d){return x(d.letter);})
+                .attr("width", x.bandwidth())
+                .attr("y", function (d) {return y(d.count);})
+                .attr("height", function (d) { return  height - y(+d.count);});
+
+
+
+                // Append second bar
+            svg.selectAll(".bar")
+                .data(data2)
+                .enter().append("rect")
+                .attr("class", "bar2")
+                .attr("x", function (d){return x2(d.letter);})
                 .attr("width", x.bandwidth())
                 .attr("y", function (d) {return y(d.count);})
                 .attr("height", function (d) { return  height - y(+d.count);});
@@ -103,7 +106,32 @@ function frekvens(){
                 .call(d3.axisLeft(y));
 
 
-        })(letterCountArray)
+        })(letterCountArray_ref, letterCountArray_ciph);
+
+
+        function getFrequencyArray(text) {
+            var letterCountArray = [];
+            var currentLetter = "";
+            var letterExists;
+
+            for (i = 0; i < text.length; i++){
+                letterExists = false;
+                currentLetter = text.charAt(i);
+                letterCountArray.forEach( function (letterCount){
+                        if (letterCount.letter == currentLetter)
+                        {
+                            letterCount.count ++;
+                            letterExists = true;
+                        }
+                        
+                            
+                })
+                if (!letterExists)
+                    letterCountArray.push( {"letter": currentLetter, "count": 1});
+                }
+                console.log(JSON.stringify(letterCountArray));
+                return letterCountArray;
+            }
 
 }
 
