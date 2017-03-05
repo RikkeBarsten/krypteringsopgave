@@ -33,3 +33,28 @@ function cipher() {
     }
 }
 
+function frekvens(){
+    var text = document.getElementById("frekvenstekst").value;
+    var letterCountArray = [];
+    var currentLetter = "";
+    var letterExists;
+
+    for (i = 0; i < text.length; i++){
+        letterExists = false;
+        currentLetter = text.charAt(i);
+        letterCountArray.forEach( function (letterCount){
+                if (letterCount.letter == currentLetter)
+                {
+                    letterCount.count ++;
+                    letterExists = true;
+                }
+                
+                    
+         })
+         if (!letterExists)
+            letterCountArray.push( {"letter": currentLetter, "count": 1});
+        }
+        console.log(JSON.stringify(letterCountArray));
+
+}
+

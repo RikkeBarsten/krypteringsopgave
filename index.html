@@ -13,13 +13,16 @@
     <div class="container">
         <div class="header clearfix">
         <nav>
-          
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Kryptering</a></li>
+            <li role="presentation"><a href="frekvens.html">Frekvensanalyse</a></li>
+          </ul>
         </nav>
         <h3 class="text-muted">Rikkes krypteringsside</h3>
       </div>
       <div class="jumbotron">
         <h1>Velkommen</h1>
-        <p class="lead">Denne side krypterer dine tekster ved brug af "Ceasars Sipher". Indtast din nøgle (et heltal), og den tekst krypteres.</p>
+        <p class="lead">Denne side krypterer dine tekster ved brug af <a href="https://en.wikipedia.org/wiki/Caesar_cipher">"Caesar cipher"</a>. Indtast din nøgle (et heltal), og din tekst krypteres. Dette er en monoalfabetisk substitutionsalgoritme, der der nem at bryde, enten vha. frekvensanalyse eller ved "brute force".</p>
        
       </div>
   <div class="row marketing">
@@ -29,7 +32,7 @@
         <br><br>
         Tekst til kryptering:<br>
         <!--<input type="text" id="plaintext" name="plaintext" value="Skriv din tekst her">-->
-        <textarea class="input" id="plaintext" rows="5" cols="20">Some text here</textarea>
+        <textarea class="input" id="plaintext" rows="5" cols="20">Din tekst her</textarea>
         <br><br>            
         <input type="button" onclick="cipher()" value="Vis krypteret tekst">
     </form>
