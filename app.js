@@ -48,11 +48,11 @@ function frekvens(){
     var ref_max = letterCountArray_ref[0].letter;
     var ciph_max = letterCountArray_ciph[0].letter;
 
-    console.log("Ref max: " + ref_max);
-    console.log("Ciph max: " + ciph_max);
+    // console.log("Ref max: " + ref_max);
+    // console.log("Ciph max: " + ciph_max);
 
     var possibleKey = ciph_max.charCodeAt() - ref_max.charCodeAt();
-    console.log("Guessed key: " + possibleKey);
+    //console.log("Guessed key: " + possibleKey);
 
     for (i = 0; i < cipherText.length; i++)
         {
@@ -64,9 +64,9 @@ function frekvens(){
             decipherText += String.fromCharCode((index - possibleKey) % 65536);
             
         }
-        console.log(decipherText);
+        //console.log(decipherText);
 
-   
+        document.getElementById("resultat").innerHTML = "Din nøgle er sandsynligvis:  " + possibleKey + ".<br>" + "Din oprindelige besked er i så fald:" + "<br><br>" + decipherText;
 
 
 
