@@ -36,9 +36,39 @@ function cipher() {
 function frekvens(){
     var referenceText = document.getElementById("frekvenstekst").value;
     var cipherText = document.getElementById("krypteret").value;
+    var decipherText;
     
     var letterCountArray_ref = getFrequencyArray(referenceText);
     var letterCountArray_ciph = getFrequencyArray(cipherText);
+
+    letterCountArray_ref.sort(function(a,b) {return b.count - a.count;});
+    letterCountArray_ciph.sort(function(a, b) { return b.count - a.count; });
+
+    //Find the most frequent letter in each letterCountArray
+    var ref_max = letterCountArray_ref[0].letter;
+    var ciph_max = letterCountArray_ciph[0].letter;
+
+    console.log("Ref max: " + ref_max);
+    console.log("Ciph max: " + ciph_max);
+
+    var possibleKey = ciph_max.charCodeAt() - ref_max.charCodeAt();
+    console.log("Guessed key: " + possibleKey);
+
+    for (i = 0; i < cipherText.length; i++)
+        {
+            
+            var index = cipherText.charCodeAt(i);
+
+            //There are only 65.536 values in utf-8, so making sure the 
+            //cipher is wrapped if charCode + key exceeds this number:
+            decipherText += String.fromCharCode((index - possibleKey) % 65536);
+            
+        }
+        console.log(decipherText);
+
+   
+
+
 
         (function (data1, data2)
         {
@@ -46,8 +76,7 @@ function frekvens(){
                         width = 960 - margin.left - margin.right,
                         height = 500 - margin.top - margin.bottom;
 
-            data1.sort(function(a, b) { return b.count - a.count; });
-            data2.sort(function(a, b) { return b.count - a.count; });
+            
             
             var x = d3.scaleBand()
                     .range([0, width])
